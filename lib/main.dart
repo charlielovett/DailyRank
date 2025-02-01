@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/game.dart';
 import 'screens/results.dart';
+import './utilities/theme.dart'; // Make sure the path matches where you've placed the file
+
 
 void main() {
   runApp(const MyApp());
@@ -11,18 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    ColorScheme dailyRankTheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF7E71FC),
-      brightness: Brightness.light,
-    );
     
     return MaterialApp(
       title: 'Daily Rank',
-      theme: ThemeData(
-        colorScheme: dailyRankTheme,
-        useMaterial3: true,
-      ),
+      theme: AppTheme.customTheme,
       home: GamePage(), // Start with the Game Page
       routes: {
         '/game': (context) => GamePage(),
