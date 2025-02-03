@@ -48,65 +48,77 @@ class _RankYourFavoriteCitiesState extends State<RankYourFavoriteCities> {
           ),
         ),
         Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                flex: 1,
-                child: ListView.builder(
-                  itemCount: cities.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height *
-                          0.4 /
-                          cities.length, // Adjust height relative to screen
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(1),
-                      margin: const EdgeInsets.symmetric(vertical: 16),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text('${index + 1}'),
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                flex: 8,
-                child: ReorderableListView.builder(
-                  itemCount: cities.length,
-                  onReorder: _onReorder,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      key: ValueKey(cities[index]),
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height *
-                            0.4 /
-                            cities.length, // Adjust height relative to screen
-                        child: Card(
-                          elevation: 2,
-                          child: ListTile(
-                            title: Text(cities[index]),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  width: 40,
+                  child: ListView.builder(
+                    itemCount: cities.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            right: 8, top: 17, bottom: 17),
+                        child: Container(
+                          height: 34,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            '${index + 1}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: ReorderableListView.builder(
+                    itemCount: cities.length,
+                    onReorder: _onReorder,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        key: ValueKey(cities[index]),
+                        child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.tertiary,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.only(
+                                left: 18.0, top: 6.0, bottom: 6.0),
+                            title: Text(cities[index],
+                                style: const TextStyle(fontSize: 16.0)),
+                            tileColor: Theme.of(context).colorScheme.tertiary,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 26.0),
+          padding: const EdgeInsets.symmetric(vertical: 48.0, horizontal: 24.0),
           child: SizedBox(
-            width: double.infinity, // 80% of screen width
+            width: double.infinity,
             height: 60,
             child: ElevatedButton(
-              onPressed: () {debugPrint("Submit");},
+              onPressed: () {
+                debugPrint("Submit");
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 shape: RoundedRectangleBorder(
